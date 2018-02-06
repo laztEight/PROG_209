@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Tree of Life</title>
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+	<link rel="stylesheet" href="css/main.css">
+</head>
+	<header>
+        <h1>The Tree of Life</h1>
+	</header>
+ 
+<body>
+	<div id="container">
+        <div id="gamePhoto"></div>
+        <div id="description"></div>
+        <div id="roomItems"></div>
+        <div id="directions"></div>
+        <div class="userStuff" id="user">
+            <form id="doThis">
+                <p>What would you like to do?<br/><input type=text name="fiDoThis" size="35" maxlength="300"></p>
+                <button onclick="do" id="userDo">Click</button>
+            </form>
+            <div id="userOutput">Recent moves:<br/>
+            </div>
+        </div>
+        <div id="btn">
+            <form>
+                <button id="save" onclick="save">Save</button>
+                <button id="Reset" onclick="reset">Start Over</button>
+            </form>
+        </div>
+    </div>
+
+	<script src="js/game.js"></script>
+</body>
+</html>
