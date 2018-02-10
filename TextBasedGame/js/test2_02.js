@@ -1,8 +1,3 @@
-//var currentImage = document.getElementById("gamePhoto").innerHTML;
-
-//var currentDescription = document.getElementById("description").innerHTML ;
-//var currentItems =  document.querySelector("img");
-
 // creating the Room class that holds the image, description and items
 class Room {
   constructor (image, description, items){
@@ -12,13 +7,6 @@ class Room {
   }
   describeRoom() {
     console.log(`You are in ${this.description}. You see ${this.items}`);
-    }
-
-    get cDescription() {
-      return this.description;
-    }
-    set cDescription(test){
-      this.description = test;
     }
 }
 
@@ -50,12 +38,6 @@ areaSeven.describeRoom();
 var areaEight = new Room(src="images/cavern3.jpg", "yet another section of the cave: carven III", "a  sspell book");
 areaSeven.describeRoom();
 
-
-
-
-areaOne.cDescription = "test";
-currentDescription = areaOne.cDescription;
-
 //Putting the rooms into an array
 var currentRoom = [9];
 currentRoom [0]= areaZero;
@@ -71,58 +53,10 @@ console.log(currentRoom);
 
 
 //Set the player's start location
-var playerLocation = 4;
+var roomLocation = 4;
 
-//Initialize the player's input
-var playerInput = "";
-
-//Initialize the game gameMessage
-var gameMessage = "";
-
-//An array of actions that the game understands
-// and var to store the current action
-
-var directionIKnow = ["north", "east", "south", "west"];
-var direction = "";
-
+//declairing the ouput of room discription
 var roomInfo = document.getElementById("roomInfo");
-var input = document.getElementById("input");
 
-//The button
-var  button = document.querySelector("button");
-button.style.cursor = "pointer";
-button.addEventListener("click", clickHandler, false);
-
-//Display the player's locaiton
-//render();
-
-function clickHandler(){
-  playGame();
-}
-
-function playGame(){
-  //converting player's input to all losercase
-  playerInput = input.value;
-  playerInput = playerInput.toLowerCase();
-}
-
-//Reseting messages from previous return
-gameMessage = "",
-action = "";
-
-//moving the playerInput
-for(i=0; i<directionIKnow.length; i++){
-  if(playerInput.indexOf(directionIKnow[i]) !== -1){
-    action = actionsIKnow[i];
-    console.log(`player's action: ${action}`);
-    break;
-  }
-}
-
-var roomInfo = document.getElementById("roomInfo");
-roomInfo.innerHTML = currentRoom[playerLocation].description;
-
-
-//Backpack that will hold all the items picked up.
-var backpack = [];
-console.log(backpack);
+//Displaying the player's location
+roomInfo.innerHTML = currentRoom[roomLocation].description;
