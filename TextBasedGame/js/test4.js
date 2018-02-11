@@ -97,15 +97,6 @@ move = userInputWords[0];
 //userInputItem is the second word.
 var userInputItem = userInputWords[1];
 
- /*for(i=0; i<actionKnown.length; i++){
-    if(move.indexOf(actionKnown[i]) != -1){
-        console.log(`move = ${move} and userInputItem = ${userInputItem}`);
-    }
-
-        else {
-            gameResponce = "unknown action.";
-        }
-    }*/
 //Moving around the board
 console.log("input move before switch");
 
@@ -151,12 +142,12 @@ switch (move){
       break;
 
       case "take":
-        // TODO need to parse second word
-        break;
+      takeItem(userInputItem);
+      break;
 
       case "drop":
-           // TODO need to parse second word
-          break;
+      dropItem(userInputItem);
+      break;
 
          case "use":
              // TODO need to parse second word
@@ -171,6 +162,56 @@ console.log("test before deliver function");
 deliver();
 }
 
+function takeItem(pItem){
+    //Does an item exist in curret room
+if (currentRoom[roomLocation].items == pItem) {
+    //placing item in backpack
+    backpack.push(pItem);
+    //remove from room
+    currentRoom[roomLocation].items = "";
+    gameResponce = `You picked up a ${pItem}`;
+}
+else {
+    gameResponce = `There is no ${pItem} here`;
+}
+    console.log(`Current room item: ${currentRoom[roomLocation].items}`);
+    console.log(`Current backpack items: ${backpack}`);
+}
+
+function dropItem(pItem){
+    // Is there space in room to drop item
+    if (currentRoom[roomLocation].items == "" ){
+        //Is it in backpack
+        if(backpack.indexOf(pItem) != -1){
+            //add item back into game world at current location
+            currentRoom[roomLocation].items = pItem;
+            //remove item from backpack
+            backpack.splice(backpack.indexOf(pItem), 1);
+            //the message to the user that item has been dropped
+            gameResponce = `You dropped the ${pItem}`;
+        }
+        else {
+            //item was not in backpack.  Message to the user
+            gameResponce = `You do not have a ${pItem} in your backpack`;
+        }
+    }
+    else {
+        gameResponce = `There's no space to drop ${pItem}`;
+    }
+    }
+
+
+function useItem(){
+//Check bacpack if item is in bag
+
+//If item is not in backpack tell user that s/he does not have said item
+
+//If item is in bag
+    //What to do with item
+
+    //remove from backpack
+}
+
   function deliver(){
     // Current room title
     roomTitle.innerHTML = currentRoom[roomLocation].title;
@@ -181,5 +222,6 @@ deliver();
     //current room items
     roomItems.innerHTML = `<u><strong>Item available:</strong></u><br/> ${currentRoom[roomLocation].items}`;
     //Desplaying the message from the game: if any
-    userOutput.innerHTML += `<br/> <em>${gameResponce}</em>`;
+    userOutput.innerHTML = `<br/> <em>${gameResponce}</em>`;
+    userInput.innerHTML = "";
   }
