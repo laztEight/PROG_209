@@ -56,38 +56,37 @@ currentRoom[8] = areaEight;
 console.log(currentRoom);
 
 // An array to store what the player is carrying
-var sack = [];
-//Set the player's start location
-var roomLocation = 4;
+var backpack = [];
+//Creating arry for available actions
+var actionKnown = ["north", "south", "east", "west", "take", "drop", "use"];
 
-//Creating the user's input
+//Initializing/clearing the board for the start of a
 var userInput = "";
-
+console.log(Initializing userInput);
+var move = "";
+console.log("Initializing player's move");
 //Initialize the gameResponce
 var gameResponce = "";
+console.log("initialzing gameResponce");
+//Set the player's start location
+var roomLocation = 4;
+console.log("Initalizing roomLocation");
 
-/* creating an array of possible moves a player can make that the game to understands also a variable to store the user actionsIKnow */
-var actionKnown = ["north", "south", "east", "west", "pickup", "drop", "use"];
-var move = "";
-
-/*declairing the input (userInput) and ouput (roomInfo) of room title, picture, userInput and userOutput */
+/*declairing majority of global variables for placement on html page.  Including input (userInput) and ouput (roomInfo) of room title, picture, userInput and userOutput */
 var roomTitle = document.getElementById("roomTitle");
 var roomImage = document.getElementById("roomImage");
 var roomInfo = document.getElementById("roomInfo");
 var userInput = document.getElementById("userInput");
 var userOutput = document.getElementById("userOutput");
 
+//Initalizing elements
 roomTitle.innerHTML = currentRoom[roomLocation].title;
 console.log("initialze the room title");
-
-roomImage.src  = currentRoom[roomLocation].image;
-
+//roomImage.src  = currentRoom[roomLocation].image;
 roomInfo.innerHTML = currentRoom[roomLocation].description;
 console.log("Initialize current location and item if there is one ");
-
 userOutput.innerHTML = `${gameResponce}`;
 console.log("Initialize game responce");
-
 
 //creating the button move
 var btnUserInput = document.getElementById("btnUserInput");
@@ -114,7 +113,6 @@ function theGame(){
     }
   }
 //Moving around the board
-
 console.log("input move before switch");
 switch (move){
   case "north":
@@ -165,12 +163,22 @@ switch (move){
 console.log("test before deliver function");
 deliver();
 }
+
   function deliver(){
     // the actual output description
     roomTitle.innerHTML = currentRoom[roomLocation].title;
+    roomImage.innerHTML.src = "currentRoom[roomLocation].image";
     roomInfo.innerHTML = currentRoom[roomLocation].description + currentRoom[roomLocation].items;
     console.log("test inside deliver function");
 
+//Display an item if one is located in current Room.
+if (currentRoom[roomLocation].items != "") {
+  gameResponce = `<br/>You see <strong>${currentRoom[roomLocation].item}</strong> on the ground`;
+  
+
+}
+
+
     //Desplaying the message from the game
-    userOutput.innerHTML += `<br/> ${gameResponce}`;
+    userOutput.innerHTML += `<br/> <em>${gameResponce}</em`;
   }
