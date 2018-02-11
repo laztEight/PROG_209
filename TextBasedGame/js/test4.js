@@ -1,10 +1,13 @@
 //debug west and east in switch statement
+//debug items.  Not showing up properly
+//images not showing up
 
 // creating the Room class that holds the image, description and items
 class Room {
   constructor ( title, image, description, blockedMessage, items)
   {
     this.title = title;
+    this.image = image;
     this.description = description;
     this.blockedMessage = blockedMessage;
     this.items = items;
@@ -15,32 +18,15 @@ class Room {
 }
 
 //creating the individual rooms from the room class
-var areaZero = new Room("A Garden", "..images/garden.jpg", "You are standing in a beautiful garden. There are birds overhead, the sun is bright and the flowers look amazing.", "It's too dangerout to go that way.", "a lighter");
-areaZero.describeRoom();
-
-var areaOne = new Room("Waterfall", "..images/waterfall.jpg", "A magnigicat waterfall is in front of you with clear flowing water.  To the east you see an entrace to a cave.", "The current is too strong to swim through.", "");
-areaOne.describeRoom();
-
-var areaTwo = new Room("Cavern I", "..images/cavern1", "a cave: cavern I", "There's large poiseness spider's that way.", "a torch");
-areaTwo.describeRoom();
-
-var areaThree = new Room("The Gate", "..images/gate.jpg", "The grand gate awaits you.  It's as if the gates are begging you to pass through", "The walls are too tall to climb.", "a backpack");
-areaThree.describeRoom();
-
-var areaFour = new Room ("Wooded Forest", "..images/forest2.jpg", "There are trees all around you.  So many trees and leaves that the sunlight just barely makes it though for you to see.", "", "a key");
-areaFour.describeRoom();
-
-var areaFive = new Room("Cavern II", "..images/cavern2.jpg", "another section of the cave: carern II", "That pathway is blocked.  There is a very large heavy stone in the way.", "");
-areaFive.describeRoom();
-
-var areaSix = new Room("THE TREE", "../images/tree.jgp", "THE tree", "Go another way.  The castle guards say no one may enter", "");
-areaSix.describeRoom();
-
-var areaSeven = new Room("Fire Swamp", "../images/fireswamp.jpg", "the fire swamp", "The fire is too hot to go that way.", "a sword");
-areaSeven.describeRoom();
-
-var areaEight = new Room("Cavern III", "../images/cavern3.jpg", "yet another section of the cave: carven III", "You're too afraid to go that way.  It sounds like a large orc may be sleeping down there.", "a  sspell book");
-areaSeven.describeRoom();
+var areaZero = new Room("A Garden", "./images/garden.png", "You are standing in a beautiful garden. There are birds overhead, the sun is bright and the flowers look amazing.", "It's too dangerout to go that way.", "lighter");
+var areaOne = new Room("Waterfall", "./images/waterfall.jpg", "A magnigicat waterfall is in front of you with clear flowing water.  To the east you see an entrace to a cave.", "The current is too strong to swim through.", "");
+var areaTwo = new Room("Cavern I", "./images/cavern1.jpg", "a cave: cavern I", "There's large poiseness spider's that way.", "torch");
+var areaThree = new Room("The Gate", "./images/gate.jpg", "The grand gate awaits you.  It's as if the gates are begging you to pass through", "The walls are too tall to climb.", "backpack");
+var areaFour = new Room ("Wooded Forest", "./images/forest2.jpeg", "There are trees all around you.  So many trees and leaves that the sunlight just barely makes it though for you to see.", "", "key");
+var areaFive = new Room("Cavern II", "./images/cavern2.jpg", "another section of the cave: carern II", "That pathway is blocked.  There is a very large heavy stone in the way.", "");
+var areaSix = new Room("THE TREE", "./images/tree.jpg", "THE tree", "Go another way.  The castle guards say no one may enter", "");
+var areaSeven = new Room("Fire Swamp", "./images/fireswamp.jpg", "the fire swamp", "The fire is too hot to go that way.", "sword");
+var areaEight = new Room("Cavern III", "./images/cavern3.jpg", "yet another section of the cave: carven III", "You're too afraid to go that way.  It sounds like a large orc may be sleeping down there.", "book");
 
 //Putting the rooms into an array
 var currentRoom = [9];
@@ -61,32 +47,30 @@ var backpack = [];
 var actionKnown = ["north", "south", "east", "west", "take", "drop", "use"];
 
 //Initializing/clearing the board for the start of a
-var userInput = "";
-console.log(Initializing userInput);
+
 var move = "";
-console.log("Initializing player's move");
 //Initialize the gameResponce
 var gameResponce = "";
-console.log("initialzing gameResponce");
 //Set the player's start location
 var roomLocation = 4;
-console.log("Initalizing roomLocation");
 
 /*declairing majority of global variables for placement on html page.  Including input (userInput) and ouput (roomInfo) of room title, picture, userInput and userOutput */
 var roomTitle = document.getElementById("roomTitle");
 var roomImage = document.getElementById("roomImage");
 var roomInfo = document.getElementById("roomInfo");
+var roomItems = document.getElementById("roomItems");
 var userInput = document.getElementById("userInput");
 var userOutput = document.getElementById("userOutput");
 
 //Initalizing elements
 roomTitle.innerHTML = currentRoom[roomLocation].title;
 console.log("initialze the room title");
-//roomImage.src  = currentRoom[roomLocation].image;
+roomImage.src  = currentRoom[roomLocation].image;
 roomInfo.innerHTML = currentRoom[roomLocation].description;
 console.log("Initialize current location and item if there is one ");
-userOutput.innerHTML = `${gameResponce}`;
+roomItems.innerHTML = `<u><strong>Item available:</strong></u><br/> ${currentRoom[roomLocation].items}`;
 console.log("Initialize game responce");
+userInput.innerHTML = "";
 
 //creating the button move
 var btnUserInput = document.getElementById("btnUserInput");
@@ -103,17 +87,28 @@ function theGame(){
   // taking the user's input and making it all lowercase
   var str = userInput.value;
   userInput.value = str.toLowerCase();
+  str = str.toLowerCase();
 
-  //resetting the vars from the user's last turn
-  for(i=0; i<actionKnown.length; i++){
-    if(userInput.value.indexOf(actionKnown[i]) != -1){
-      move = actionKnown[i];
-      console.log(`User's move: ${move}`);
-      break;
+// parse out user's input value
+var userInputWords = [];
+userInputWords = str.split(" ");
+// move is the first world
+move = userInputWords[0];
+//userInputItem is the second word.
+var userInputItem = userInputWords[1];
+
+ /*for(i=0; i<actionKnown.length; i++){
+    if(move.indexOf(actionKnown[i]) != -1){
+        console.log(`move = ${move} and userInputItem = ${userInputItem}`);
     }
-  }
+
+        else {
+            gameResponce = "unknown action.";
+        }
+    }*/
 //Moving around the board
 console.log("input move before switch");
+
 switch (move){
   case "north":
   if (roomLocation >= 3){
@@ -125,7 +120,7 @@ switch (move){
     }
     break;
 
-  case ("south"):
+  case "south":
   if (roomLocation<6){
     roomLocation+=3;
     gameResponce = "";
@@ -135,7 +130,7 @@ switch (move){
   }
       break;
 
-    case ("west"):
+    case "west":
     if (roomLocation % 3 != 0) {
         roomLocation -= 1;
         gameResponce = "";
@@ -145,8 +140,8 @@ switch (move){
     }
       break;
 
-    case("east"):
-    if (mapLocation % 3 != 2){
+    case"east":
+    if (roomLocation % 3 != 2){
       roomLocation += 1;
       gameResponce = "";
     }
@@ -154,6 +149,18 @@ switch (move){
       gameResponce = currentRoom[roomLocation].blockedMessage;
     }
       break;
+
+      case "take":
+        // TODO need to parse second word
+        break;
+
+      case "drop":
+           // TODO need to parse second word
+          break;
+
+         case "use":
+             // TODO need to parse second word
+            break;
 
   default:
     gameResponce = "Please try again.  I do not understand.";
@@ -165,20 +172,14 @@ deliver();
 }
 
   function deliver(){
-    // the actual output description
+    // Current room title
     roomTitle.innerHTML = currentRoom[roomLocation].title;
-    roomImage.innerHTML.src = "currentRoom[roomLocation].image";
-    roomInfo.innerHTML = currentRoom[roomLocation].description + currentRoom[roomLocation].items;
-    console.log("test inside deliver function");
-
-//Display an item if one is located in current Room.
-if (currentRoom[roomLocation].items != "") {
-  gameResponce = `<br/>You see <strong>${currentRoom[roomLocation].item}</strong> on the ground`;
-  
-
-}
-
-
-    //Desplaying the message from the game
-    userOutput.innerHTML += `<br/> <em>${gameResponce}</em`;
+    //current room image
+    roomImage.src  = currentRoom[roomLocation].image;
+    //current room description
+    roomInfo.innerHTML = currentRoom[roomLocation].description;
+    //current room items
+    roomItems.innerHTML = `<u><strong>Item available:</strong></u><br/> ${currentRoom[roomLocation].items}`;
+    //Desplaying the message from the game: if any
+    userOutput.innerHTML += `<br/> <em>${gameResponce}</em>`;
   }
