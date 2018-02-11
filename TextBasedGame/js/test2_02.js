@@ -55,8 +55,89 @@ console.log(currentRoom);
 //Set the player's start location
 var roomLocation = 4;
 
-//declairing the ouput of room discription
+//Creating the user's input
+var userInput = "";
+
+//Initialize the gameResponce
+var gameResponce = "Initialize gameResponce";
+
+/* creating an array of possible moves a player can make that the game to understands also a variable to store the user actionsIKnow */
+var actionKnown = ["north", "south", "east", "west"];
+var move = "";
+
+//declairing the input (userInput) and ouput (roomInfo) of room discription
 var roomInfo = document.getElementById("roomInfo");
+var userInput = document.getElementById("userInput");
+var userOutput = document.getElementById("userOutput");
+
+roomInfo.innerHTML = currentRoom[roomLocation].description;
+console.log("testing at Initialize");
+userOutput.innerHTML = `${gameResponce}`;
+console.log("gameResponce initialize")
+
+
+//creating the button move
+var btnUserInput = document.getElementById("btnUserInput");
+btnUserInput.style.cursor = "pointer";
+btnUserInput.addEventListener("click", clickHandler, false);
 
 //Displaying the player's location
-roomInfo.innerHTML = currentRoom[roomLocation].description;
+function clickHandler()
+{
+  theGame();
+  move = "";
+}
+
+function theGame()
+{
+  // taking the user's input and making it all lowercase
+  var str = userInput.value;
+  userInput.value = str.toLowerCase();
+
+  //resetting the vars from the user's last turn
+  for(i=0; i<actionKnown.length; i++)
+  {
+    if(userInput.value.indexOf(actionKnown[i]) != -1)
+    {
+      move = actionKnown[i];
+      console.log(`User's move: ${move}`);
+      break;
+    }
+  }
+//Moving around the board
+
+console.log("input move before switch");
+switch (move)
+{
+  case "north":
+    roomLocation -=3;
+    break;
+
+  case ("south"):
+      roomLocation+=3;
+      break;
+
+    case ("west"):
+    roomLocation -=1;
+      break;
+
+    case("east"):
+      roomLocation +=1;
+      break;
+
+  default:
+    gameResponce = "Please try again.  I do not understand.";
+}
+// deliver the location to the page
+console.log("test before deliver function");
+deliver();
+}
+  function deliver()
+  {
+    // the actual output description
+    roomInfo.innerHTML = currentRoom[roomLocation].description;
+    console.log("test inside deliver function");
+
+    //Desplaying the message from the game
+    userOutput.innerHTML += `<br/> ${gameResponce}`;
+  }
