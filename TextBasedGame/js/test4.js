@@ -1,8 +1,4 @@
-//debug west and east in switch statement
-//debug items.  Not showing up properly
-//images not showing up
-
-// creating the Room class that holds the image, description and items
+/*You may see some JQuard type of language.  Those technques are being utilized because that is what ecmaScript 6 gave for directions.  What ecmaScript 6 I used i learned from lynda.com  */
 class Room {
   constructor ( title, image, description, blockedMessage, items)
   {
@@ -18,15 +14,15 @@ class Room {
 }
 
 //creating the individual rooms from the room class
-var areaZero = new Room("A Garden", "./images/garden.png", "You are standing in a beautiful garden. There are birds overhead, the sun is bright and the flowers look amazing.", "It's too dangerout to go that way.", "lighter");
+var areaZero = new Room("A Garden", "./images/garden.png", "You are standing in a beautiful garden. There are birds overhead, the sun is bright and the flowers look amazing.", "It's too dangerout to go that way.", "");
 var areaOne = new Room("Waterfall", "./images/waterfall.jpg", "A magnigicat waterfall is in front of you with clear flowing water.  To the east you see an entrace to a cave.", "The current is too strong to swim through.", "");
-var areaTwo = new Room("Cavern I", "./images/cavern1.jpg", "a cave: cavern I", "There's large poiseness spider's that way.", "torch");
-var areaThree = new Room("The Gate", "./images/gate.jpg", "The grand gate awaits you.  It's as if the gates are begging you to pass through", "The walls are too tall to climb.", "backpack");
-var areaFour = new Room ("Wooded Forest", "./images/forest2.jpeg", "There are trees all around you.  So many trees and leaves that the sunlight just barely makes it though for you to see.", "", "key");
+var areaTwo = new Room("Cavern I", "./images/cavern1.jpg", "a cave: cavern I", "There's large poiseness spider's that way.", "");
+var areaThree = new Room("The Gate", "./images/gate.jpg", "The grand gate awaits you.  It's as if the gates are begging you to pass through", "The walls are too tall to climb.", "");
+var areaFour = new Room ("Wooded Forest", "./images/forest2.jpeg", "There are trees all around you.  So many trees and leaves that the sunlight just barely makes it though for you to see.", "");
 var areaFive = new Room("Cavern II", "./images/cavern2.jpg", "another section of the cave: carern II", "That pathway is blocked.  There is a very large heavy stone in the way.", "");
 var areaSix = new Room("THE TREE", "./images/tree.jpg", "THE tree", "Go another way.  The castle guards say no one may enter", "");
 var areaSeven = new Room("Fire Swamp", "./images/fireswamp.jpg", "the fire swamp", "The fire is too hot to go that way.", "sword");
-var areaEight = new Room("Cavern III", "./images/cavern3.jpg", "yet another section of the cave: carven III", "You're too afraid to go that way.  It sounds like a large orc may be sleeping down there.", "book");
+var areaEight = new Room("Cavern III", "./images/cavern3.jpg", "yet another section of the cave: carven III", "You're too afraid to go that way.  It sounds like a large orc may be sleeping down there.", "");
 
 //Putting the rooms into an array
 var currentRoom = [9];
@@ -68,7 +64,7 @@ console.log("initialze the room title");
 roomImage.src  = currentRoom[roomLocation].image;
 roomInfo.innerHTML = currentRoom[roomLocation].description;
 console.log("Initialize current location and item if there is one ");
-roomItems.innerHTML = `<u><strong>Item available:</strong></u><br/> ${currentRoom[roomLocation].items}`;
+roomItems.innerHTML = `<u><strong>Item available:</strong></u><br/>`;
 console.log("Initialize game responce");
 userInput.innerHTML = "";
 
@@ -200,16 +196,47 @@ function dropItem(pItem){
     }
     }
 
-
 function useItem(){
 //Check bacpack if item is in bag
+if(backpack.indexOf(pItem) != -1){
+    switch (pItem) {
+        case key:
+        if (currentRoom[roomLocation] == 8) {
+            gameResponce = `The key unlocked a chest.  You found a book.`;
+            currentRoom[roomLocation].items = "book";
+        }
+        else {
+            gameResponce = `You cann't use the ${pItem} here`;
+        }
+            break;
 
-//If item is not in backpack tell user that s/he does not have said item
+        case sword:
+            if (currentRoom[roomLocation]==0) {
 
-//If item is in bag
-    //What to do with item
+                gameResponce = `You stunned the Orger with the sword.  You see a key.`;
+                currentRoom[roomLocation].items = "key";
+            }
+            else {
+                gameResponce = `You cannot use the ${pItem} here.`
+            }
+            break;
 
-    //remove from backpack
+        case book:
+            if (currentRoom[roomLocation]== 6) {
+                gameRespone = 'YOU SAVED THE TREE OF LIFE! <br/> Game Over';
+            }
+            else {
+                gameRespone = `You cannont use the ${pItem} here.`;
+            }
+            break;
+        default:
+        gameRespone = `There seems to be an error. Please type another command.`;
+    }
+}
+else {
+    //item was not in backpack.  Message to the user
+    gameResponce = `You do not have a ${pItem} in your backpack`;
+}
 }
 
   function deliver(){
