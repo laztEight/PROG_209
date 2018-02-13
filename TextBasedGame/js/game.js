@@ -14,15 +14,15 @@ class Room {
 }
 
 //creating the individual rooms from the room class
-var areaZero = new Room("A Garden", "./images/garden.png", "You are standing in a beautiful garden. There are birds overhead, the sun is bright and the flowers look amazing.", "It's too dangerout to go that way.", "");
+var areaZero = new Room("A Garden", "./images/garden.png", "You are standing in a beautiful garden. There are birds overhead, the sun is bright and the flowers look amazing. Yet in the middle of this garden is a Troll.", "It's too dangerout to go that way.", "");
 var areaOne = new Room("Waterfall", "./images/waterfall.jpg", "A magnigicat waterfall is in front of you with clear flowing water.  To the east you see an entrace to a cave.", "The current is too strong to swim through.", "");
-var areaTwo = new Room("Cavern I", "./images/cavern1.jpg", "a cave: cavern I", "There's large poiseness spider's that way.", "");
+var areaTwo = new Room("Cavern I", "./images/cavern1.jpg", "Inside the cave you see tunnels.", "There's large poiseness spider's that way.", "");
 var areaThree = new Room("The Gate", "./images/gate.jpg", "The grand gate awaits you.  It's as if the gates are begging you to pass through", "The walls are too tall to climb.", "");
 var areaFour = new Room ("Wooded Forest", "./images/forest2.jpeg", "There are trees all around you.  So many trees and leaves that the sunlight just barely makes it though for you to see.", "");
-var areaFive = new Room("Cavern II", "./images/cavern2.jpg", "another section of the cave: carern II", "That pathway is blocked.  There is a very large heavy stone in the way.", "");
-var areaSix = new Room("THE TREE", "./images/tree.jpg", "THE tree", "Go another way.  The castle guards say no one may enter", "");
-var areaSeven = new Room("Fire Swamp", "./images/fireswamp.jpg", "the fire swamp", "The fire is too hot to go that way.", "sword");
-var areaEight = new Room("Cavern III", "./images/cavern3.jpg", "yet another section of the cave: carven III", "You're too afraid to go that way.  It sounds like a large orc may be sleeping down there.", "");
+var areaFive = new Room("Cavern II", "./images/cavern2.jpg", "It's dark and wet in this cave.", "That pathway is blocked.  There is a very large heavy stone in the way.", "");
+var areaSix = new Room("THE TREE", "./images/tree.jpg", "You are standing in front of THE tree of Life.  She looks so sick.  How do you save her?", "Go another way.  The castle guards say no one may enter", "");
+var areaSeven = new Room("Fire Swamp", "./images/fireswamp.jpg", "There is fire shooting up from the ground.  You never know where the next fire will be coming from.", "The fire is too hot to go that way.", "sword");
+var areaEight = new Room("Cavern III", "./images/cavern3.jpg", "You fell into a cavern.  In the middle of the room is a locked chest.", "You're too afraid to go that way.  It sounds like a large orc may be sleeping down there.", "");
 
 //Putting the rooms into an array
 var currentRoom = [9];
@@ -54,6 +54,7 @@ var roomTitle = document.getElementById("roomTitle");
 var roomImage = document.getElementById("roomImage");
 var roomInfo = document.getElementById("roomInfo");
 var roomItems = document.getElementById("roomItems");
+var instructions = document.getElementById("instructions");
 var backpackItems = document.getElementById("backpackItems");
 var userInput = document.getElementById("userInput");
 var userOutput = document.getElementById("userOutput");
@@ -65,6 +66,7 @@ roomImage.src  = currentRoom[roomLocation].image;
 roomInfo.innerHTML = currentRoom[roomLocation].description;
 console.log("Initialize current location and item if there is one ");
 roomItems.innerHTML = `<u><strong>Item's in room:</strong></u><br/>`;
+instructions.innerHTML = "<u><strong>How to Play</strong></u><br/> To move: north, south, east and west.<br/>Actions for items: take, drop or use.<br/>Example 'north or take sword";
 console.log("Initialize game responce");
 userInput.innerHTML = "";
 
@@ -214,7 +216,7 @@ if(backpack.indexOf(pItem) != -1){
         console.log(`In ${currentRoom[roomLocation].title}`);
             if (roomLocation == 0) {
                 console.log("in garden");
-                gameResponce = `You stunned the Orger with the ${pItem}.  You see a key.`;
+                gameResponce = `You stunned the Troll with the ${pItem}.  You see a key.`;
                 console.log("test sword responce");
                 currentRoom[roomLocation].items = "key";
                 console.log(`${pItem} add to garden.`);

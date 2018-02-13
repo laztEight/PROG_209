@@ -12,7 +12,7 @@ header{
     flex-wrap: wrap;
     align-content: center;
     width: 700px;
-    height: 800px;
+    height: 750px;
     background-color: rgba(16,99,12, 1);
     border-style: ridge;
     border-width: 5px;
@@ -61,11 +61,25 @@ header{
     max-width: 100%;
     background-color: bisque;
 }
+#userOutput{
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 60%;
+    bottom: auto;
+    margin: auto;
+    width: 600px;
+    height: 50px;
+    max-height: 100%;
+    max-width: 100%;
+    background-color: bisque;
+    text-align: center;
+}
 #roomItems{
     position: absolute;
     left: 13%;
     right: auto;
-    top: 62%;
+    top: 70%;
     bottom: auto;
     margin: auto;
     width: 230px;
@@ -78,7 +92,7 @@ header{
     position: absolute;
     left: auto;
     right: 13%;
-    top: 62%;
+    top: 70%;
     bottom: auto;
     margin: auto;
     width: 250px;
@@ -97,7 +111,7 @@ header{
     top: 50%;
     bottom: auto;
     width: 90%;
-    height: 30%;
+    height: 40%;
     max-height: 100%;
     max-width: 100%;
     background-color: rgba( 218, 247, 166, .4);
@@ -106,7 +120,7 @@ header{
     position: absolute;
     left: 0px;
     right: 0px;
-    top: 70%;
+    top: 80%;
     bottom: auto;
     margin: auto;
     width: 230px;
@@ -118,9 +132,9 @@ header{
 }
 #btnUserInput{
     position: absolute;
-    left: 50%;
+    left: 42%;
     right: auto;
-    top: 87%;
+    top: 93%;
     bottom: auto;
     margin: auto;
     width: auto;
@@ -131,9 +145,9 @@ header{
 }
 #btnSave{
     position: absolute;
-    left: 42%;
+    left: 50%;
     right: auto;
-    top: 87%;
+    top: 93%;
     bottom: auto;
     margin: auto;
     width: auto;
