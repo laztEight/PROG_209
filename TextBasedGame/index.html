@@ -14,25 +14,18 @@
 				<h1>The Tree of Life</h1>
 	</header>
 	<div id="container">
-        <div id="gamePhoto" >"</div>
+		<div id="roomTitle"></div>
+		<img id="roomImage" src="images/theme.jpg" width="300" height="250" alt="missing photo" />
         <div id="roomInfo"></div>
         <div id="roomItems"></div>
+		<div id="backpackItems"></div>
         <div id="directions"></div>
         <div class="userStuff" id="user">
-					<input id="input" type="text" placeholder="Enter your action…">
-            <form id="doThis">
-                <p>What would you like to do?<br/><input type=text name="fiDoThis" size="35" maxlength="300"></p>
-              <!--   <button onclick="do" id="userDo">Click</button> -->
-            </form>
-            <div id="userOutput">Recent moves:<br/>
-            </div>
-        </div>
-        <div id="btn">
-            <form>
-                <button id="save" onclick="save">Save</button>
-                <button id="Reset" onclick="reset">Start Over</button>
-            </form>
-        </div>
+					<input id="userInput" type="text" placeholder="Enter your action…">
+					 <button id="btnUserInput">Enter</button>
+					 <button id="btnSave">Save</button>
+			 </div>
+
     </div>
 
 	<script src="js/game.js"></script>
