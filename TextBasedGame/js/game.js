@@ -66,7 +66,7 @@ roomImage.src  = currentRoom[roomLocation].image;
 roomInfo.innerHTML = currentRoom[roomLocation].description;
 console.log("Initialize current location and item if there is one ");
 roomItems.innerHTML = `<u><strong>Item's in room:</strong></u><br/>`;
-instructions.innerHTML = "<u><strong>How to Play</strong></u><br/> To move: north, south, east and west.<br/>Actions for items: take, drop or use.<br/>Example 'north or take sword";
+instructions.innerHTML = "<u><strong>How to Play</strong></u><br/> To move: north, south, east and west. Actions for items: take, drop or use. Example 'north or take sword";
 console.log("Initialize game responce");
 userInput.innerHTML = "";
 
@@ -74,11 +74,20 @@ userInput.innerHTML = "";
 var btnUserInput = document.getElementById("btnUserInput");
 btnUserInput.style.cursor = "pointer";
 btnUserInput.addEventListener("click", clickHandler, false);
+//creating the local storage save button
+var btnSave = document.getElementById("btnSave");
+btnSave.style.cursor = "pointer";
+btnSave.addEventListener("click", saveInfo);
 
 //Displaying the player's location
 function clickHandler(){
   theGame();
   move = "";
+}
+//Saving game to local storage
+function saveInfo(){
+    localStorage.setItem(roomLocation, currentRoom[roomLocation]);
+    localStorage.setItem(backpack,)
 }
 
 function theGame(){

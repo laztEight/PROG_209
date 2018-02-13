@@ -88,7 +88,7 @@ header{
     max-width: 100%;
     background-color: bisque;
 }
-#backpackItems{
+#instructions{
     position: absolute;
     left: auto;
     right: 13%;
@@ -99,6 +99,7 @@ header{
     height: 50px;
     max-height: 100%;
     max-width: 100%;
+    font-size: 11px;
     background-color: bisque;
 }
 .userStuff{
