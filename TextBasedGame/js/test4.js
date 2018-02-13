@@ -145,17 +145,17 @@ switch (move){
       dropItem(userInputItem);
       break;
 
-         case "use":
-             // TODO need to parse second word
-            break;
+        case "use":
+        useItem(userInputItem);
+        break;
 
   default:
     gameResponce = "Please try again.  I do not understand.";
 }
     console.log(`current location: ${currentRoom[roomLocation]}`);
-// deliver the location to the page
-console.log("test before deliver function");
-deliver();
+// render the location to the page
+console.log("test before render function");
+render();
 }
 
 function takeItem(pItem){
@@ -196,12 +196,12 @@ function dropItem(pItem){
     }
     }
 
-function useItem(){
+function useItem(pItem){
 //Check bacpack if item is in bag
 if(backpack.indexOf(pItem) != -1){
     switch (pItem) {
-        case key:
-        if (currentRoom[roomLocation] == 8) {
+        case "key":
+        if (roomLocation == 8) {
             gameResponce = `The key unlocked a chest.  You found a book.`;
             currentRoom[roomLocation].items = "book";
         }
@@ -210,23 +210,27 @@ if(backpack.indexOf(pItem) != -1){
         }
             break;
 
-        case sword:
-            if (currentRoom[roomLocation]==0) {
-
-                gameResponce = `You stunned the Orger with the sword.  You see a key.`;
+        case "sword":
+        console.log(`In ${currentRoom[roomLocation].title}`);
+            if (roomLocation == 0) {
+                console.log("in garden");
+                gameResponce = `You stunned the Orger with the ${pItem}.  You see a key.`;
+                console.log("test sword responce");
                 currentRoom[roomLocation].items = "key";
+                console.log(`${pItem} add to garden.`);
             }
             else {
-                gameResponce = `You cannot use the ${pItem} here.`
+                gameResponce = `You cannot use the ${pItem} here.`;
             }
             break;
 
-        case book:
-            if (currentRoom[roomLocation]== 6) {
-                gameRespone = 'YOU SAVED THE TREE OF LIFE! <br/> Game Over';
+        case "book":
+            if (roomLocation== 6) {
+                gameResponce = 'YOU SAVED THE TREE OF LIFE! <br/> Game Over';
+                console.log(`used ${pItem} and should be game over`);
             }
             else {
-                gameRespone = `You cannont use the ${pItem} here.`;
+                gameResponce = `You cannont use the ${pItem} here.`;
             }
             break;
         default:
@@ -239,7 +243,7 @@ else {
 }
 }
 
-  function deliver(){
+  function render(){
     // Current room title
     roomTitle.innerHTML = currentRoom[roomLocation].title;
     //current room image
