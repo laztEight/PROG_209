@@ -1,0 +1,159 @@
+@charset "UTF-8";
+
+body{
+    background-color: rgba(16, 99, 12, 1);
+}
+header{
+    text-align: center;
+}
+#container{
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    width: 700px;
+    height: 750px;
+    background-color: rgba(16,99,12, 1);
+    border-style: ridge;
+    border-width: 5px;
+    margin:auto;
+    padding: 30px 10px;
+}
+#roomTitle{
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 5%;
+    bottom: auto;
+    width: 70%;
+    height: 40%;
+    max-width: 100%;
+    max-height: 100%;
+    background-color: rgba(118, 14, 9, .7);
+    border-style: solid;
+    border-width: 5px;
+    box-shadow: 5px -5px rgb( 115, 115, 115);
+    border-color: rgba(0, 0, 0, 1);
+    margin:15px auto 10px;
+    text-align: center;
+    font-size: 25px;
+}
+#roomImage{
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 12%;
+    bottom: auto;
+    margin: auto;
+    width: 300px;
+    height: 250px;
+}
+#roomInfo{
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 52%;
+    bottom: auto;
+    margin: auto;
+    width: 600px;
+    height: 50px;
+    max-height: 100%;
+    max-width: 100%;
+    background-color: bisque;
+}
+#userOutput{
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 60%;
+    bottom: auto;
+    margin: auto;
+    width: 600px;
+    height: 50px;
+    max-height: 100%;
+    max-width: 100%;
+    background-color: bisque;
+    text-align: center;
+}
+#roomItems{
+    position: absolute;
+    left: 13%;
+    right: auto;
+    top: 70%;
+    bottom: auto;
+    margin: auto;
+    width: 230px;
+    height: 50px;
+    max-height: 100%;
+    max-width: 100%;
+    background-color: bisque;
+}
+#instructions{
+    position: absolute;
+    left: auto;
+    right: 13%;
+    top: 70%;
+    bottom: auto;
+    margin: auto;
+    width: 250px;
+    height: 50px;
+    max-height: 100%;
+    max-width: 100%;
+    font-size: 11px;
+    background-color: bisque;
+}
+.userStuff{
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    left: 5%;
+    right: 5px;
+    top: 50%;
+    bottom: auto;
+    width: 90%;
+    height: 40%;
+    max-height: 100%;
+    max-width: 100%;
+    background-color: rgba( 218, 247, 166, .4);
+}
+#userInput{
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 80%;
+    bottom: auto;
+    margin: auto;
+    width: 230px;
+    height: 25px;
+    max-height: 100%;
+    max-width: 100%;
+    background-color: orange;
+    text-align: center;
+}
+#btnUserInput{
+    position: absolute;
+    left: 42%;
+    right: auto;
+    top: 93%;
+    bottom: auto;
+    margin: auto;
+    width: auto;
+    height: auto;
+    align-content: center;
+    background-color: rgba( 218, 247, 166, 1);
+    text-align: center;
+}
+#btnSave{
+    position: absolute;
+    left: 50%;
+    right: auto;
+    top: 93%;
+    bottom: auto;
+    margin: auto;
+    width: auto;
+    height: auto;
+    align-content: center;
+    background-color: rgba( 218, 247, 166, 1);
+    text-align: center;
+}
