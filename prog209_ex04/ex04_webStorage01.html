@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+<html>
+<head> 
+<meta charset="UTF-8">
+<title>HTML 5 Web Storage</title>
+
+<link href="ex04_reset.css" type="text/css" rel="stylesheet" />
+
+<link href="ex04_webStorage_Style.css" type="text/css" rel="stylesheet" />
+
+<script>
+    
+ window.addEventListener("load",init);
+
+function init(){
+	if(typeof(Storage)!=="undefined"){
+	
+	display();
+	
+	var button=document.getElementById("button");
+	button.addEventListener("click",saveInfo);
+	}
+	
+	else{
+	//old bowser	
+	}
+}
+
+function saveInfo(){
+//Donut Style	
+    var donut=document.getElementById("donut").value;
+//filling
+	var filling=document.getElementById("filling").value;
+//Toppings
+    var topping=document.getElementById("topping").value; 
+//amount
+    var amount=document.getElementById("amount").value;
+
+	
+	localStorage.setItem("userDonut",donut);
+	localStorage.setItem("donutFilling",filling);
+    
+    localStorage.setItem("toppingName", topping);
+    
+    localStorage.setItem("amountNumber", amount);
+	
+	
+	display();
+	
+}
+
+function display(){
+// the box for all the displayed user output
+    var rightBox=document.getElementById("useroutput");
+// display of the donut style
+	var theDonut=localStorage.getItem("userDonut");
+// display of the donut filling
+	var theFilling=localStorage.getItem("donutFilling");
+// display topping
+    var theTopping=localStorage.getItem("toppingName");
+//display amount
+    var theAmount=localStorage.getItem("amountNumber");
+
+	
+	if(theDonut==undefined || theFilling==undefined || theTopping==undefined){
+		document.getElementById("useroutput").innerHTML="";
+	}
+	else{ document.getElementById("useroutput").innerHTML="OUTPUT  <hr /><br /><br />Donut Style: "+theDonut+"<br /><br />  The Filling: "+theFilling+"<br/><br/> Topping: "+theTopping+"<br/><br/>Amount ordered: "+theAmount;
+	}
+	
+}
+</script>
+
+
+
+</head>
+
+<body>
+
+<div id="main">
+	<section id="userinput">
+    INPUT <br>
+	<hr />
+    <br /><br />
+    <form>
+    
+    <div>Donut Style:<br /><input type="input" id="donut" size="20"></div>
+    <br />
+     
+    <div>Filling:<br /> <input type="input" id="filling" size="20"></div>
+    <br />
+    
+    <div>Toppings:<br /> <textarea id="topping" rows="10"></textarea></div>
+    <br />
+
+    <div>How many: <br/><input type="input" id="amount" size="20"></div>
+    <br/>
+    
+    <div><input type="button" id="button" value="Save"></div>
+    
+    </form>
+    </section>
+    
+    
+    <section id="useroutput">
+ OUTPUT  
+ 	<hr />
+    <br /><br />
+    </section>
+
+</div>
+
+
+
+</body>
+</html>
