@@ -2,29 +2,53 @@
 
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+    <meta charset="utf-8">
 
-  <title>Exercise 7.4</title>
-  <meta name="description" content="Exercise 7.4">
-  <meta name="author" content="Luann Webster">
-  <!--[if lt IE 9]>
+    <title>Exercise 7.4</title>
+    <meta name="description" content="Exercise 7.4">
+    <meta name="author" content="Luann Webster">
+    <link rel="stylesheet" href="exercise_07_4.css">
+    <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
-  <![endif]-->
+    <![endif]-->
 </head>
 
 <body>
-<div  class="container">
+    <div  class="container">
+        <form id="frmUser" name="frmUser" method="post" action="contact-submitted.htm">
+            <div class="group">
+                <label for="userName">Your name:</label>
+                <input name="userName" placeholder="Enter Name" type="text" id="userName" />
+            </div>
+            <div class="group">
+                <label for="userPhone">Your phone number (required):</label>
+                <input name="userPhone" placeholder="(xxx) xxx-xxxx" type="text" value="" id="userPhone" />
+            </div>
+            <div class="group">
+                <label for="favColor">Your favorite color?</label>
+                <input name="favColor" value="Orange" type="text" id="favColor" placeholder="Your choice"  />
+            </div>
+        </form>
 
 
-</div>
+    </div>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-  <script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>
 
-  $(function(){
-      'use strict';
+    $(function(){
+        'use strict';
 
-  });
-  </script>
+        var $form = $('#frmUser');
+
+        $form.find('.group:nth-child(1)')
+        .addClass('error');
+
+        $form.find('.group:nth-child(3)')
+        .addClass('msg')
+        .append('<p>Good Choice!</p>');
+
+    });
+    </script>
 </body>
 </html>
