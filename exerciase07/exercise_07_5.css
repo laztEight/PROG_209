@@ -1,0 +1,45 @@
+body {
+    background-color: #efefef;
+    color: #222;
+    padding: 2em;
+}
+input[type=text] {
+    padding: 0.5em;
+    border: 1px solid #999;
+    width: 20em;
+    display: block;
+    font-size: 100%;
+}
+
+label {
+    display: block;
+    font-size: 85%;
+    margin-bottom: 0.2em;
+    color: #333;
+}
+
+.group {
+    margin: 0 0 1em;
+}
+
+.error {
+    background: rgb(243, 105, 103);
+    border: 1px solid red;
+    padding: 5px;
+}
+.error label {
+    font-weight: bold;
+    color: rgb(236, 213, 13);
+    font-size: 50px;
+}
+.msg {
+    background: rgb(33, 211, 36);
+    border: 1px solid green;
+    padding: 5px;
+}
+.msg p {
+    padding-left: 2px;
+    margin-bottom: 2px;
+    font-size: 85%;
+    font-weight: bold;
+}
