@@ -32,6 +32,7 @@ Description: This project will reference chapter 5 of the Foundation Gaming text
 
 //  create classes
     //class for location types
+    // required p: name, health, image
     class area
     {
         constructor (areaName, areaHealth, areaImage)
@@ -40,8 +41,8 @@ Description: This project will reference chapter 5 of the Foundation Gaming text
             this.areaHealth = areaHealth;
             this.areaImage = areaImage;
         }
-        descripeArea(){
-            console.log(`Name: ${this.name} <br/> Health: ${this.health}`);
+        describeArea(){
+            console.log(`Name: ${this.areaName} -- Health: ${this.areaHealth}`);
         }
     }
     //class for user icon
@@ -52,34 +53,40 @@ class piece {
         this.pieceHealth = pieceHealth;
         this.pieceImage = pieceImage;
     }
-    descripteUser(){
-        console.console.log(`User Name: ${this.pieceName}<br/>User health: ${this.pieceHealth}`);
+    describeUser(){
+        console.log(`User Name: ${this.pieceName} -- User health: ${this.pieceHealth}`);
     }
 }
 
 //create the objects
 //map objects
 var cliff = new area("Cliff", 0, "");
+cliff.describeArea();
+
 var mine = new area("Mine", -1, "");
+mine.describeArea();
+
 var flower = new area("Flower", 1, "");
 var temple = new area("Temple", 0, "");
-var trail = new area("Trail", 0, "";)
+var trail = new area("Trail", 0, "");
+
 //piece objects
 var user = new piece("User", 3, "");
 var monster = new piece("Monster", "", "");
 
 // create 2D array of ojects (8X8) for the map
 var board = [
-    [flower, trail, cliff, trail, mine, trail, mine, temple],
-    [mine, trail, trail, cliff, trail, trail, mine, trail],
-    [mine, flower, trail, trail, cliff, trail, mine, cliff],
-    [cliff, trail, trail, mine, trail, cliff, trail, flower],
-    [trail, trail, mine, cliff, cliff, trail, trail, flower],
-    [trail, mine, trail, cliff, cliff, flower, trail],
-    [trail, mine, mine, flower, trail, cliff, trail, trail],
-    [trail, trail, flower, cliff, trail, trail, mine, trail]
+    [trail, cliff, mine, mine, flower, trail, temple],
+    [mine, flower, trail, trail, mine, cliff, trail, mine],
+    [mine, trail, mine, trail, flower, trail, trail, cliff],
+    [flower, trail, flower, cliff, mine, mine, trail, flower],
+    [trail, cliff, trail, mine, flower, mine, trail, mine],
+    [trail, mine, flower, mine, cliff, trail, trail, mine],
+    [cliff, trail, trail, trail, trail, trail, mine, cliff],
+    [trail, trail, mine, mine, flower, cliff, trail, flower]
 ];
 
+var stage = document.getElementById("stage");
 //the size of the each cell
 var SIZE = 64;
 //the number of rows and columns
@@ -95,7 +102,7 @@ function render()
         for (var column = 0; column < COLUMNS;  column++)
         {
             //Create an img tag
-            var cell = document.createElement("img");
+            var cell = document.createElement("div");
             //Set it's CSS class to "cell"
             cell.setAttribute("class", "cell");
             //Add the img tag to the <div id="stage"> tag
