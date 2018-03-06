@@ -1,7 +1,20 @@
+#stage {
+    position: relative;
+    width: 512px;
+    height: 512px;
+    background-image: url("../images/trail-unsplash.jpg");
+}
 .cell {
     display: block;
     position: absolute;
     height: 64px;
     width: 64px;
     border: 5px solid purple;
+}
+
+#output {
+    width: 512px;
+}
+p {
+    width: 612px;
 }

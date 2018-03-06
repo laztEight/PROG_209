@@ -60,15 +60,15 @@ class piece {
 
 //create the objects
 //map objects
-var cliff = new area("Cliff", 0, "");
+var cliff = new area("Cliff", 0, "../images/mountain.png");
 cliff.describeArea();
 
-var mine = new area("Mine", -1, "");
+var mine = new area("Mine", -1, "../images/trail.png");
 mine.describeArea();
 
-var flower = new area("Flower", 1, "");
+var flower = new area("Flower", 1, "../images/flower.png");
 var temple = new area("Temple", 0, "");
-var trail = new area("Trail", 0, "");
+var trail = new area("Trail", 0, "../images/trail.png");
 
 //piece objects
 var user = new piece("User", 3, "");
@@ -97,17 +97,36 @@ render()
 
 function render()
 {
+    //Clear the stage of img tag cells from previous turn
+        if (stage.hasChildNodes())
+        {
+            for (var i = 0; i < ROWS*COLUMNS; i++)
+            {
+                stage.removeChild(stage.firstChild);
+            }
+        }
+
+
     //Render game by looping through the board arrays
     for (var row = 0; row < ROWS; row++) {
         for (var column = 0; column < COLUMNS;  column++)
         {
             //Create an img tag
-            var cell = document.createElement("div");
+            var cell = document.createElement("img");
             //Set it's CSS class to "cell"
             cell.setAttribute("class", "cell");
             //Add the img tag to the <div id="stage"> tag
             stage.appendChild(cell);
+
             //Find the correct image
+            switch (expression)
+            {
+                case expression:
+
+                    break;
+                default:
+
+            }
         }
     }
 }
