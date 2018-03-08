@@ -33,18 +33,49 @@ ctxA.fillRect(90, 170, 170, 20);
   ctxA.fillText('ENTER', 180, 230);
   ctxA.stroke();
 
+
+
 //The Stop Light sign
 var canvasB = document.getElementById("canvasB");
 var ctxB = canvasB.getContext("2d");
 
+ctxB.save();
+
+// background
+
+//rotating to make diamond
+ctxB.translate(canvasB.width / 2, canvasB.height / 2);
+ctxB.rotate(Math.PI / 4);
+ctxB.translate(-(250 / 2), - (250/ 2));
+ctxB.fillStyle = 'gold';
+ctxB.fillRect(0, 0, 250, 250);
+
+// creating the rounded black outline
+ctxB.beginPath();
+ctxB.lineJoin = 'round';
+ctxB.moveTo(0, 0);
+ctxB.lineTo(0,245);
+ctxB.lineTo(245, 245);
+ctxB.lineTo(245, 0);
+ctxB.lineTo(0, 0);
+ctxB.closePath();
+
+
+
+ctxB.strokeStyle = 'black';
+ctxB.lineWidth = 10;
+ctxB.stroke();
+
+ctxB.restore();
+
 // black square rectangle
 ctxB.beginPath();
 ctxB.fillStyle = 'black';
-ctxB.fillRect(90, 65, 75, 220);
+ctxB.fillRect(138, 75, 74, 200);
 
 //red light
 ctxB.beginPath();
-ctxB.arc(127, 110, 20, 0, 2*Math.PI, false);
+ctxB.arc(175, 115, 20, 0, 2*Math.PI, false);
 ctxB.fillStyle = 'red';
 ctxB.fill();
 ctxB.lineWidth = 5;
@@ -53,7 +84,7 @@ ctxB.stroke();
 
 //yellow light
 ctxB.beginPath();
-ctxB.arc(127, 170, 20, 0, 2*Math.PI, false);
+ctxB.arc(175, 175, 20, 0, 2*Math.PI, false);
 ctxB.fillStyle = 'yellow';
 ctxB.fill();
 ctxB.lineWidth = 5;
@@ -62,12 +93,13 @@ ctxB.stroke();
 
 //green light
 ctxB.beginPath();
-ctxB.arc(127, 230, 20, 0, 2*Math.PI, false);
+ctxB.arc(175, 235, 20, 0, 2*Math.PI, false);
 ctxB.fillStyle = 'green';
 ctxB.fill();
 ctxB.lineWidth = 5;
 ctxB.strokeStyle = 'green';
 ctxB.stroke();
+
 
 /*
 ctxA.beginPath();
