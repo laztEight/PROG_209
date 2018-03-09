@@ -1,0 +1,35 @@
+@charset "UTF-8";
+/* CSS Document */
+ 
+#main{
+width:750px; height:500px;
+margin:0 auto;	
+}
+body{
+    background-color: lightpink;
+    background-image: url(bkDonut02.jpg);
+    background-repeat: no-repeat center center fixed;
+    background-size: cover;
+    opacity: 5;
+    z-index: -1;
+}
+#userinput{
+	float:left;
+	margin-top:25px;
+	padding:20px;
+	background-color:rgba(72,209,204,.9);
+	width:300px; height:500px;
+    font-weight: 900;
+	}
+
+
+#useroutput{
+	float:right;
+	margin-top:25px;
+	margin-left:20px;
+	padding:20px;
+	width:300px; height:500px;
+	background-color:rgba(103, 92, 172, .9);
+	font-weight: 900;
+	}
+
