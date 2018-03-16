@@ -3,6 +3,7 @@ body {
     font-size: 24pt;
     margin-left: auto;
     margin-right: auto;
+    background-color: #D8FF75;
 }
 h1 {
     font-family: kefa;
@@ -91,7 +92,7 @@ header {
 #stage {
     position: relative;
     width: 100%;
-    height: 700px;
+    height: 100px;
     top: 100px;
     margin-left: auto;
     margin-right: auto;
@@ -100,13 +101,18 @@ header {
 #introScreen {
     position: absolute;
     display: block;
-    width: 550px;
-    height: 550px;
-    margin: 15px;
-    left: 0px;
-    right: 0px;
-
-    background-image: url("../images/trail-unsplash.jpg");
+    width: 600px;
+    height: 600px;
+    align-self: center;
+}
+#introImage {
+    width: 600px;
+    height: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url("../images/introImage.jpg");
+    border: 14px solid black;
 }
 #start {
     position: absolute;
@@ -118,7 +124,7 @@ header {
     display: none;
     width: 512px;
     height: 512px;
-    background-color: orange;
+    background-image: url(../images/trailBackground.jpg);
 }
 
 .cell {
@@ -126,7 +132,6 @@ header {
     position: absolute;
     height: 64px;
     width: 64px;
-    border: 5px solid purple;
 }
 
 #output {

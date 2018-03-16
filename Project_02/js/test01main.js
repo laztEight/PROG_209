@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 // Arrow key codes
 var UP = 64,
     DOWN = 64,
@@ -28,11 +29,13 @@ var startBtn = document.getElementById("start");
 
     //class for user icon
 class piece {
-    constructor(pieceName, pieceHealth, pieceImage)
+    constructor(pieceName, pieceHealth, pieceImage, pieceLocationRow, pieceLocationColumn)
     {
         this.pieceName = pieceName;
         this.pieceHealth = pieceHealth;
         this.pieceImage = pieceImage;
+        this.pieceLocationRow = pieceLocationRow;
+        this.pieceLocationColumn = pieceLocationColumn;
     }
     describeUser(){
         console.log(`User Name: ${this.pieceName} -- User health: ${this.pieceHealth}`);
@@ -40,30 +43,30 @@ class piece {
 }
 
 //create the objects
-var cliff = new area("Cliff", 0, "./images/mountain.png");
+var cliff = new area("Cliff", 0, "images/cliff.png");
 cliff.describeArea();
 
-var mine = new area("Mine", -1, "../images/grass.png");
+var mine = new area("Mine", -1, "images/grass.png");
 mine.describeArea();
 
-var flower = new area("Flower", 1, "./images/flower.png");
-var temple = new area("Temple", 0, "./images/temple.png");
-var trail = new area("Trail", 0, "./images/grass.png");
+var food = new area("Food", 1, "images/food.png");
+var temple = new area("Temple", 0, "images/temple2.png");
+var trail = new area("Trail", 0, "images/grass.png");
 
 //piece objects
-var player = new piece("Player", 3, "./images/user.png");
-var monster = new piece("Monster", "", "./images/monster.png");
+var player = new piece("Player", 3, "images/user.png", 7, 0);
+var monster = new piece("Monster", "", "images/monster.png", 0, 0);
 
 // create 2D array of ojects (8X8) for the map
 var board = [
-    [trail, cliff, mine, mine, flower, trail, temple],
-    [mine, flower, trail, trail, mine, cliff, trail, mine],
-    [mine, trail, mine, trail, flower, trail, trail, cliff],
-    [flower, trail, flower, cliff, mine, mine, trail, flower],
-    [trail, cliff, trail, mine, flower, mine, trail, mine],
-    [trail, mine, flower, mine, cliff, trail, trail, mine],
+    [trail, cliff, mine, mine, food, trail, temple],
+    [mine, food, trail, trail, mine, cliff, trail, mine],
+    [mine, trail, mine, trail, food, trail, trail, cliff],
+    [food, trail, food, cliff, mine, mine, trail, food],
+    [trail, cliff, trail, mine, food, mine, trail, mine],
+    [trail, mine, food, mine, cliff, trail, trail, mine],
     [cliff, trail, trail, trail, trail, trail, mine, cliff],
-    [trail, trail, mine, mine, flower, cliff, trail, flower]
+    [trail, trail, mine, mine, food, cliff, trail, food]
 ];
 
 //set players health
@@ -77,9 +80,9 @@ var ROWS = board.length;
 var COLUMNS = board[0].length;
 
 //Set player's start location
-var playerLocation = [7,0];
+var playerLocation;
 // Set monster's start location
-var monsterLocation = [0,0];
+var monsterLocation;
 
 
 //Initialize objects on the screen
@@ -131,7 +134,12 @@ function render()
             gameBoard.appendChild(cell);
 
             //Find the correct image
-            cell.src = board.areaImage;
+            if (player.pieceLocationRow == row && player.pieceLocationColumn == column) {
+                cell.src = player.pieceImage;
+            }
+                else {
+                    cell.src = board[row][column].areaImage;
+                }
 
             //Position the cell
             cell.style.top = row*SIZE+"px";
