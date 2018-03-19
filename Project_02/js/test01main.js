@@ -120,19 +120,22 @@ function keydownHandler(event)
                         player.pieceHealth = player.pieceHealth - mine.areaHealth;
                         board[player.pieceLocationRow][player.pieceLocationColumn] = player;
                             break;
-
-                            case food:
-                            console.log("Found food. +1 health");
-                            player.pieceLocationRow--;
-                            player.pieceHealth = player.pieceHealth + food.areaHealth;
-                            board[player.pieceLocationRow][player.pieceLocationColumn] = player;
-                                break;
-
-                                case trail:
-                                console.log("just a good ol' trail ");
-                                player.pieceLocationRow--;
-                                board[player.pieceLocationRow][player.pieceLocationColumn] = player;
-                                    break;
+                        case food:
+                        console.log("Found food. +1 health");
+                        player.pieceLocationRow--;
+                        player.pieceHealth = player.pieceHealth + food.areaHealth;
+                        board[player.pieceLocationRow][player.pieceLocationColumn] = player;
+                            break;
+                        case trail:
+                        console.log("just a good ol' trail ");
+                        player.pieceLocationRow--;
+                        board[player.pieceLocationRow][player.pieceLocationColumn] = player;
+                            break;
+                        case temple:
+                        console.log("Congrats! You've made it to the temple!");
+                        player.pieceLocationRow--;
+                        board[player.pieceLocationRow][player.pieceLocationColumn] = player;
+                            break;
                         default:
                         console.log('There is an error with UP arrow in area switch');
                     }
@@ -142,12 +145,12 @@ function keydownHandler(event)
                 }
             }
             else {
-                console.log("Error in first if statement in UP arrow");
+                console.log("Cannot go that direction.");
             }
             break;
 
             case DOWN:
-                if (player.pieceLocationRow < ROWS - 1) {
+                if (player.pieceLocationRow <  ROWS-1) {
                     board[player.pieceLocationRow][player.pieceLocationColumn] = 0;
                     console.log("entered DOWN Arrow");
 
@@ -161,18 +164,18 @@ function keydownHandler(event)
                             board[player.pieceLocationRow][player.pieceLocationColumn] = player;
                                 break;
 
-                                case food:
-                                console.log("Found food. +1 health");
-                                player.pieceLocationRow++;
-                                player.pieceHealth = player.pieceHealth + food.areaHealth;
-                                board[player.pieceLocationRow][player.pieceLocationColumn] = player;
-                                    break;
+                            case food:
+                            console.log("Found food. +1 health");
+                            player.pieceLocationRow++;
+                            player.pieceHealth = player.pieceHealth + food.areaHealth;
+                            board[player.pieceLocationRow][player.pieceLocationColumn] = player;
+                                break;
 
-                                    case trail:
-                                    console.log("just a good ol' trail ");
-                                    player.pieceLocationRow++;
-                                    board[player.pieceLocationRow][player.pieceLocationColumn] = player;
-                                        break;
+                            case trail:
+                            console.log("just a good ol' trail ");
+                            player.pieceLocationRow++;
+                            board[player.pieceLocationRow][player.pieceLocationColumn] = player;
+                                break;
                             default:
                             console.log('There is an error in DOWN area switch');
                         }
@@ -182,7 +185,7 @@ function keydownHandler(event)
                     }
                 }
                 else {
-                    console.log("Error in first if statement in DOWN arrow");
+                    console.log("You cannot go that way.");
                 }
                 break;
 
@@ -200,37 +203,36 @@ function keydownHandler(event)
                             player.pieceHealth = player.pieceHealth - mine.areaHealth;
                             board[player.pieceLocationRow][player.pieceLocationColumn] = player;
                                 break;
+                            case food:
+                            console.log("Found food. +1 health");
+                            player.pieceLocationColumn--;
+                            player.pieceHealth = player.pieceHealth + food.areaHealth;
+                            board[player.pieceLocationRow][player.pieceLocationColumn] = player;
+                                break;
 
-                                case food:
-                                console.log("Found food. +1 health");
+                                case trail:
+                                console.log("just a good ol' trail ");
                                 player.pieceLocationColumn--;
-                                player.pieceHealth = player.pieceHealth + food.areaHealth;
                                 board[player.pieceLocationRow][player.pieceLocationColumn] = player;
                                     break;
-
-                                    case trail:
-                                    console.log("just a good ol' trail ");
-                                    player.pieceLocationColumn--;
-                                    board[player.pieceLocationRow][player.pieceLocationColumn] = player;
-                                        break;
                             default:
                             console.log('There is an error in LEFT arrow area switch');
-                        }
+                        } // end switch for area location
                     }
                     else {
                         console.log("There is a cliff in the way");
                     }
-                }
+                } // end if != cliff
                 else {
                     console.log("Error in first if statement in LEFT arrow");
-                }
+                } // end if statement re: end of board
                 break;
 
             case RIGHT:
                 if (player.pieceLocationColumn < COLUMNS - 1) {
                     board[player.pieceLocationRow][player.pieceLocationColumn] = 0;
 
-                    console.log("entered LEFT Arrow");
+                    console.log("entered RIGHT Arrow");
 
                     if (board[player.pieceLocationRow][player.pieceLocationColumn+1]!=cliff) {
 
@@ -255,22 +257,22 @@ function keydownHandler(event)
                                     board[player.pieceLocationRow][player.pieceLocationColumn] = player;
                                         break;
                             default:
-                            console.log('There is an error in RIGHT arrow area switch');
-                        }
-                    }
+                            console.log('Error in the right arrow != switch statement');
+                        } // end switch statement on what area
+                    } // end if statement != cliff
                     else {
                         console.log("There is a cliff in the way");
                     }
-                }
+                } // if statement of boarder of map
                 else {
                     console.log("Error in first if statement in RIGHT arrow");
                 }
                 break;
         default:
-        console.log("The default output");
-    }
+        console.log("Cannot go that direction");
+    } // end switch statment for right arrow
     render();
-}
+} // end function keydownHandler  statement for movement
 
 
 //Hide the intro screen and show the game screen
