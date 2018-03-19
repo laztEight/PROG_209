@@ -1,9 +1,9 @@
 /*jshint esversion: 6 */
 // Arrow key codes
-var UP = 64,
-    DOWN = 64,
-    RIGHT = 64,
-    LEFT = 64;
+var UP = 38,
+    DOWN = 40,
+    RIGHT = 39,
+    LEFT = 37;
 
 //  health and lives
 var currentHealth = document.getElementById("health");
@@ -12,6 +12,8 @@ var currentLives = document.getElementById("lives");
 
 var gameBoard = document.getElementById("gameBoard");
 var startBtn = document.getElementById("start");
+
+
     //class for location types
     // required p: name, health, image
     class area
@@ -26,6 +28,17 @@ var startBtn = document.getElementById("start");
             console.log(`Name: ${this.areaName} -- Health: ${this.areaHealth}`);
         }
     }
+
+    //create the  map objects
+    var cliff = new area("Cliff", 0, "images/cliff.png");
+    cliff.describeArea();
+
+    var mine = new area("Mine", -1, "images/grass.png");
+    mine.describeArea();
+
+    var food = new area("Food", 1, "images/food.png");
+    var temple = new area("Temple", 0, "images/temple2.png");
+    var trail = new area("Trail", 0, "images/grass.png");
 
     //class for user icon
 class piece {
@@ -42,23 +55,23 @@ class piece {
     }
 }
 
-//create the objects
-var cliff = new area("Cliff", 0, "images/cliff.png");
-cliff.describeArea();
-
-var mine = new area("Mine", -1, "images/grass.png");
-mine.describeArea();
-
-var food = new area("Food", 1, "images/food.png");
-var temple = new area("Temple", 0, "images/temple2.png");
-var trail = new area("Trail", 0, "images/grass.png");
-
 //piece objects
 var player = new piece("Player", 3, "images/user.png", 7, 0);
 var monster = new piece("Monster", "", "images/monster.png", 0, 0);
 
 // create 2D array of ojects (8X8) for the map
 var board = [
+    [trail, cliff, mine, mine, food, trail, temple],
+    [mine, food, trail, trail, mine, cliff, trail, mine],
+    [mine, trail, mine, trail, food, trail, trail, cliff],
+    [food, trail, food, cliff, mine, mine, trail, food],
+    [trail, cliff, trail, mine, food, mine, trail, mine],
+    [trail, mine, food, mine, cliff, trail, trail, mine],
+    [cliff, trail, trail, trail, trail, trail, mine, cliff],
+    [trail, trail, mine, mine, food, cliff, trail, food]
+];
+
+var boardOrginal = [
     [trail, cliff, mine, mine, food, trail, temple],
     [mine, food, trail, trail, mine, cliff, trail, mine],
     [mine, trail, mine, trail, food, trail, trail, cliff],
@@ -89,19 +102,176 @@ var monsterLocation;
 render();
 
 startBtn.addEventListener("click", startGameHandler, false);
+//Add a keyboard listner
+window.addEventListener("keydown", keydownHandler, false);
 
 function keydownHandler(event)
 {
     switch (event.keyCode) {
-        case UP: {
+        case UP:
+            if(player.pieceLocationRow > 0) {
+                board[player.pieceLocationRow][player.pieceLocationColumn] = 0;
+                console.log("entered UP Arrow");
+                if (board[player.pieceLocationRow-1][player.pieceLocationColumn]!=cliff) {
+                    switch (board[player.pieceLocationRow-1][player.pieceLocationColumn]) {
+                        case mine:
+                        console.log("stepped on mine. -1 health");
+                        player.pieceLocationRow--;
+                        player.pieceHealth = player.pieceHealth - mine.areaHealth;
+                        board[player.pieceLocationRow][player.pieceLocationColumn] = player;
+                            break;
 
-        }
+                            case food:
+                            console.log("Found food. +1 health");
+                            player.pieceLocationRow--;
+                            player.pieceHealth = player.pieceHealth + food.areaHealth;
+                            board[player.pieceLocationRow][player.pieceLocationColumn] = player;
+                                break;
 
+                                case trail:
+                                console.log("just a good ol' trail ");
+                                player.pieceLocationRow--;
+                                board[player.pieceLocationRow][player.pieceLocationColumn] = player;
+                                    break;
+                        default:
+                        console.log('There is an error with UP arrow in area switch');
+                    }
+                }
+                else {
+                    console.log("There is a cliff in the way");
+                }
+            }
+            else {
+                console.log("Error in first if statement in UP arrow");
+            }
             break;
-        default:
 
+            case DOWN:
+                if (player.pieceLocationRow < ROWS - 1) {
+                    board[player.pieceLocationRow][player.pieceLocationColumn] = 0;
+                    console.log("entered DOWN Arrow");
+
+                    if (board[player.pieceLocationRow+1][player.pieceLocationColumn]!=cliff) {
+
+                        switch (board[player.pieceLocationRow+1][player.pieceLocationColumn]) {
+                            case mine:
+                            console.log("stepped on mine. -1 health");
+                            player.pieceLocationRow++;
+                            player.pieceHealth = player.pieceHealth - mine.areaHealth;
+                            board[player.pieceLocationRow][player.pieceLocationColumn] = player;
+                                break;
+
+                                case food:
+                                console.log("Found food. +1 health");
+                                player.pieceLocationRow++;
+                                player.pieceHealth = player.pieceHealth + food.areaHealth;
+                                board[player.pieceLocationRow][player.pieceLocationColumn] = player;
+                                    break;
+
+                                    case trail:
+                                    console.log("just a good ol' trail ");
+                                    player.pieceLocationRow++;
+                                    board[player.pieceLocationRow][player.pieceLocationColumn] = player;
+                                        break;
+                            default:
+                            console.log('There is an error in DOWN area switch');
+                        }
+                    }
+                    else {
+                        console.log("There is a cliff in the way");
+                    }
+                }
+                else {
+                    console.log("Error in first if statement in DOWN arrow");
+                }
+                break;
+
+            case LEFT:
+                if (player.pieceLocationColumn > 0) {
+                    board[player.pieceLocationRow][player.pieceLocationColumn] = 0;
+                    console.log("entered LEFT Arrow");
+
+                    if (board[player.pieceLocationRow][player.pieceLocationColumn-1]!=cliff) {
+
+                        switch (board[player.pieceLocationRow][player.pieceLocationColumn-1]) {
+                            case mine:
+                            console.log("stepped on mine. -1 health");
+                            player.pieceLocationColumn--;
+                            player.pieceHealth = player.pieceHealth - mine.areaHealth;
+                            board[player.pieceLocationRow][player.pieceLocationColumn] = player;
+                                break;
+
+                                case food:
+                                console.log("Found food. +1 health");
+                                player.pieceLocationColumn--;
+                                player.pieceHealth = player.pieceHealth + food.areaHealth;
+                                board[player.pieceLocationRow][player.pieceLocationColumn] = player;
+                                    break;
+
+                                    case trail:
+                                    console.log("just a good ol' trail ");
+                                    player.pieceLocationColumn--;
+                                    board[player.pieceLocationRow][player.pieceLocationColumn] = player;
+                                        break;
+                            default:
+                            console.log('There is an error in LEFT arrow area switch');
+                        }
+                    }
+                    else {
+                        console.log("There is a cliff in the way");
+                    }
+                }
+                else {
+                    console.log("Error in first if statement in LEFT arrow");
+                }
+                break;
+
+            case RIGHT:
+                if (player.pieceLocationColumn < COLUMNS - 1) {
+                    board[player.pieceLocationRow][player.pieceLocationColumn] = 0;
+
+                    console.log("entered LEFT Arrow");
+
+                    if (board[player.pieceLocationRow][player.pieceLocationColumn+1]!=cliff) {
+
+                        switch (board[player.pieceLocationRow][player.pieceLocationColumn+1]) {
+                            case mine:
+                            console.log("stepped on mine. -1 health");
+                            player.pieceLocationColumn++;
+                            player.pieceHealth = player.pieceHealth - mine.areaHealth;
+                            board[player.pieceLocationRow][player.pieceLocationColumn] = player;
+                                break;
+
+                                case food:
+                                console.log("Found food. +1 health");
+                                player.pieceLocationColumn++;
+                                player.pieceHealth = player.pieceHealth + food.areaHealth;
+                                board[player.pieceLocationRow][player.pieceLocationColumn] = player;
+                                    break;
+
+                                    case trail:
+                                    console.log("just a good ol' trail ");
+                                    player.pieceLocationColumn++;
+                                    board[player.pieceLocationRow][player.pieceLocationColumn] = player;
+                                        break;
+                            default:
+                            console.log('There is an error in RIGHT arrow area switch');
+                        }
+                    }
+                    else {
+                        console.log("There is a cliff in the way");
+                    }
+                }
+                else {
+                    console.log("Error in first if statement in RIGHT arrow");
+                }
+                break;
+        default:
+        console.log("The default output");
     }
+    render();
 }
+
 
 //Hide the intro screen and show the game screen
 function startGameHandler()
@@ -117,7 +287,7 @@ function render()
         {
             for (var i = 0; i < ROWS*COLUMNS; i++)
             {
-                gameBoard.removeChild(stage.firstChild);
+                gameBoard.removeChild(gameBoard.firstChild);
             }
         }
 
@@ -138,7 +308,7 @@ function render()
                 cell.src = player.pieceImage;
             }
                 else {
-                    cell.src = board[row][column].areaImage;
+                    cell.src = boardOrginal[row][column].areaImage;
                 }
 
             //Position the cell
