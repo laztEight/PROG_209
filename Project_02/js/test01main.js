@@ -1,4 +1,24 @@
 /*jshint esversion: 6 */
+var startBtn = document.getElementById("start");
+var introWords1 = document.getElementById('introWords1');
+var introWords2 = document.getElementById("introWords2");
+
+var introImage = document.getElementById('introImage');
+var tl = new TimelineLite();
+/*
+tl.add(TweenLite.from(introImage, 1.5, {y:-900}) )
+    .add(TweenLite.to(introWords1, 1, {x: -600, y: -600}))
+    .add(TweenLite.from(startBtn, 1, {y:-800}) );
+*/
+
+TweenMax.from(introImage, 1.5, {ease: Elastic.easeInOut.config(1, 0.3), y:-900});
+TweenMax.from(introWords1, 2, {x:-650, y:-650});
+ TweenMax.from(startBtn, 3, {ease: Back.easeInOut.config(1), y: -500});
+
+//TweenMax.from(introWords1, 1.5, {x:-650, y: -650});
+//TweenMax.from(startBtn, 4.5, {ease: Back.easeInOut.config(1), y: -500});
+
+
 // Arrow key codes
 var UP = 38,
     DOWN = 40,
@@ -9,9 +29,7 @@ var UP = 38,
 var currentHealth = document.getElementById("health");
 var lifeCount = 3;
 var currentLives = document.getElementById("lives");
-
 var gameBoard = document.getElementById("gameBoard");
-var startBtn = document.getElementById("start");
 
 
     //class for location types
@@ -109,81 +127,103 @@ function keydownHandler(event)
 {
     switch (event.keyCode) {
         case UP:
+        // checking if player's move is within board
             if(player.pieceLocationRow > 0) {
+                // the ship can move, clear the current cell
                 board[player.pieceLocationRow][player.pieceLocationColumn] = 0;
                 console.log("entered UP Arrow");
+                // checking to see if route is blocked by a cliff
                 if (board[player.pieceLocationRow-1][player.pieceLocationColumn]!=cliff) {
+                    //new cell is not a cliff.  find what it is
                     switch (board[player.pieceLocationRow-1][player.pieceLocationColumn]) {
                         case mine:
                         console.log("stepped on mine. -1 health");
+                        /* subtract 1 from players pieceLocationRow to move it up one row on the board */
                         player.pieceLocationRow--;
                         player.pieceHealth = player.pieceHealth - mine.areaHealth;
+                        // Apply the players new location to the board arry
                         board[player.pieceLocationRow][player.pieceLocationColumn] = player;
                             break;
                         case food:
                         console.log("Found food. +1 health");
+                        /* subtract 1 from players pieceLocationRow to move it up one row on the board */
                         player.pieceLocationRow--;
                         player.pieceHealth = player.pieceHealth + food.areaHealth;
+                        // Apply the players new location to the board arry
                         board[player.pieceLocationRow][player.pieceLocationColumn] = player;
                             break;
                         case trail:
                         console.log("just a good ol' trail ");
+                        /* subtract 1 from players pieceLocationRow to move it up one row on the board */
                         player.pieceLocationRow--;
+                        // Apply the players new location to the board arry
                         board[player.pieceLocationRow][player.pieceLocationColumn] = player;
                             break;
                         case temple:
                         console.log("Congrats! You've made it to the temple!");
+                        /* subtract 1 from players pieceLocationRow to move it up one row on the board */
                         player.pieceLocationRow--;
+                        // Apply the players new location to the board arry
                         board[player.pieceLocationRow][player.pieceLocationColumn] = player;
                             break;
                         default:
                         console.log('There is an error with UP arrow in area switch');
                     }
                 }
+                // response if cliff is in way
                 else {
                     console.log("There is a cliff in the way");
                 }
             }
+            // edge of board
             else {
                 console.log("Cannot go that direction.");
             }
             break;
 
             case DOWN:
+            //check to see if end of board
                 if (player.pieceLocationRow <  ROWS-1) {
                     board[player.pieceLocationRow][player.pieceLocationColumn] = 0;
                     console.log("entered DOWN Arrow");
-
+                    //check to see if cliff is in the next position
                     if (board[player.pieceLocationRow+1][player.pieceLocationColumn]!=cliff) {
-
+                        // no cliff so what is in the next cell
                         switch (board[player.pieceLocationRow+1][player.pieceLocationColumn]) {
                             case mine:
                             console.log("stepped on mine. -1 health");
+                            // add one to move player down one row
                             player.pieceLocationRow++;
                             player.pieceHealth = player.pieceHealth - mine.areaHealth;
+                            // place player in the new spot on board array
                             board[player.pieceLocationRow][player.pieceLocationColumn] = player;
                                 break;
-
                             case food:
                             console.log("Found food. +1 health");
+                            // add one to move player down one row
                             player.pieceLocationRow++;
+                            // adjust player's health
                             player.pieceHealth = player.pieceHealth + food.areaHealth;
+                            //place player in the new spot on the board array
                             board[player.pieceLocationRow][player.pieceLocationColumn] = player;
                                 break;
-
                             case trail:
                             console.log("just a good ol' trail ");
+                            // add one to move player down one row
                             player.pieceLocationRow++;
+                            //place player in the new spot on the board array
                             board[player.pieceLocationRow][player.pieceLocationColumn] = player;
                                 break;
                             default:
                             console.log('There is an error in DOWN area switch');
                         }
                     }
+                    // response if cliff is in the way
                     else {
                         console.log("There is a cliff in the way");
                     }
                 }
+                // response if it is the edge of board
                 else {
                     console.log("You cannot go that way.");
                 }

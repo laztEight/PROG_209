@@ -107,7 +107,6 @@ header {
     margin-left: 0;
     margin-right: 0;
     align-self: center;
-    background-color: orange;
 }
 #introImage {
     display: block;
@@ -118,7 +117,6 @@ header {
     background-repeat: no-repeat;
     background-position: center;
     background-image: url("../images/introImage.jpg");
-    border: 14px solid black;
 }
 #start {
     position: absolute;
