@@ -35,7 +35,7 @@ var UP = 38,
     //create the  map objects
     var cliff = new area("cliff", 0, "images/cliff.png");
     var mine = new area("mine", -1, "images/grass.png");
-    var food = new area("food", 3, "images/food.png");
+    var food = new area("food", 5, "images/food.png");
     var temple = new area("temple", 0, "images/temple2.png");
     var trail = new area("trail", 0, "images/grass.png");
 
@@ -53,7 +53,7 @@ class piece {
 
 //piece objects
 var player = new piece("Player", 5,"images/user.png", 7, 0);
-var monster = new piece("Monster", -1, "images/monster.png", 0, 0);
+var monster = new piece("Monster", -5, "images/monster.png", 0, 0);
 
 // create 2D array of ojects (8X8) for the map
 var board = [
@@ -85,11 +85,11 @@ var SIZE = 64;
 var ROWS = board.length;
 var COLUMNS = board[0].length;
 
-health.innerHTML = `HEALTH: ${player.pieceHealth}`;
-output.innerHTML = `Need to put game output message here`;
-
 //Initialize objects on the screen
 render();
+var gameMessage = 'Use the arrows to move around the board.';
+health.innerHTML = `HEALTH: ${player.pieceHealth}`;
+output.innerHTML = gameMessage;
 
 startBtn.addEventListener("click", startGameHandler, false);
 //Add a keyboard listner
@@ -100,41 +100,61 @@ function keydownHandler(event)
     switch (event.keyCode) {
         case UP:
         // checking if player's move is within board
-            if(player.pieceLocationRow > 0) {
-            // the ship can move, clear the current cell
-            board[player.pieceLocationRow][player.pieceLocationColumn] = 0;
+        if(player.pieceLocationRow > 0) {
             console.log("entered UP Arrow");
-            /* subtract 1 from players pieceLocationRow to move it up one row on the board */
-            player.pieceLocationRow--;
-            // Apply the players new location to the board arry
-            board[player.pieceLocationRow][player.pieceLocationColumn] = player;
+            if (board[player.pieceLocationRow-1][player.pieceLocationColumn] != cliff) {
+                // the ship can move, clear the current cell
+                board[player.pieceLocationRow][player.pieceLocationColumn] = 0;
+                /* subtract 1 from players pieceLocationRow to move it up one row on the board */
+                player.pieceLocationRow--;
+                // Apply the players new location to the board arry
+                board[player.pieceLocationRow][player.pieceLocationColumn] = player;
             }
+            else {
+                console.log("There is a cliff in the way");
+            }
+        }
             break;
 
             case DOWN:
                 if (player.pieceLocationRow <  ROWS-1) {
-                    board[player.pieceLocationRow][player.pieceLocationColumn] = 0;
-                    console.log("entered DOWN Arrow");
-                    player.pieceLocationRow++;
-                    board[player.pieceLocationRow][player.pieceLocationColumn] = player;
+                    console.log("DOWN arrow");
+                    if (board[player.pieceLocationRow+1][player.pieceLocationColumn] != cliff) {
+                        board[player.pieceLocationRow][player.pieceLocationColumn] = 0;
+                        player.pieceLocationRow++;
+                        board[player.pieceLocationRow][player.pieceLocationColumn] = player;
+                    }
+                    else {
+                        console.log("There is a cliff in the way");
+                    }
                 }
                 break;
 
             case LEFT:
                 if (player.pieceLocationColumn > 0) {
-                    board[player.pieceLocationRow][player.pieceLocationColumn] = 0;
-                    console.log("entered LEFT Arrow");
-                    player.pieceLocationColumn--;
-                    board[player.pieceLocationRow][player.pieceLocationColumn] = player;
+                    console.log("LEFT arrow");
+                    if (board[player.pieceLocationRow][player.pieceLocationColumn-1] != cliff) {
+                        board[player.pieceLocationRow][player.pieceLocationColumn] = 0;
+                        player.pieceLocationColumn--;
+                        board[player.pieceLocationRow][player.pieceLocationColumn] = player;
+                    }
+                    else {
+                        console.log("There is a cliff in the way");
+                    }
                 }
                 break;
 
             case RIGHT:
                 if (player.pieceLocationColumn < COLUMNS - 1) {
-                    board[player.pieceLocationRow][player.pieceLocationColumn] = 0;
-                    console.log("entered RIGHT Arrow");
-                    player.pieceLocationColumn++;
-                    board[player.pieceLocationRow][player.pieceLocationColumn] = player;
+                    console.log("RIGHT arrow");
+                    if (board[player.pieceLocationRow][player.pieceLocationColumn+1] != cliff) {
+                        board[player.pieceLocationRow][player.pieceLocationColumn] = 0;
+                        player.pieceLocationColumn++;
+                        board[player.pieceLocationRow][player.pieceLocationColumn] = player;
+                    }
+                    else {
+                        console.log("There is a cliff in the way");
+                    }
                 }
                 break;
                 //Player is on edge of game board
@@ -144,26 +164,30 @@ function keydownHandler(event)
 
     //finding out what is in the players new cell
     switch (boardOrginal[player.pieceLocationRow][player.pieceLocationColumn].areaName) {
-        case trail:
+        case "trail":
             console.log("always follow the trail.");
             break;
 
-        case mine:
-            console.log("You've stepped on a mine.");
-            mine();
+        case "mine":
+            console.log("It's a mine!");
+            player.pieceHealth = player.pieceHealth + mine.areaHealth;
+            gameMessage = "You've stepped on a mine. Be careful.";
+            console.log(`${player.pieceHealth}`);
             break;
 
-        case food:
-            console.log('Yum food.');
-            food();
+        case "food":
+            console.log('food');
+            player.pieceHealth = player.pieceHealth + food.areaHealth;
+            gameMessage = "Food to increase you health."
+            console.log(`${player.pieceHealth}`);
             break;
 
-        case cliff:
+        case "cliff":
+            gameMessage = "Oh No! A CLIFF.  Better go another direction.";
             console.log("oh no! A Cliff!")
-            cliff();
             break;
 
-        case temple:
+        case "temple":
             console.log("THE TEMPLE");
             endGame();
             break;
@@ -174,7 +198,7 @@ function keydownHandler(event)
 
 //Move the monster
 moveMonster();
-/*
+
     //Subtact health for each turn
     player.pieceHealth--;
 
@@ -182,7 +206,9 @@ moveMonster();
     if (player.pieceHealth<=0) {
         endGame();
     }
-    */
+
+health.innerHTML = `HEALTH: ${player.pieceHealth}`;
+output.innerHTML = gameMessage;
     render();
 } // end function keydownHandler  statement for movement
 
@@ -257,22 +283,18 @@ function startGameHandler()
     gameScreen.style.display = "block";
 }
 
-function mine(){
-    player.pieceHealth = player.pieceHealth + mine.areaHealth;
-}
-function food(){
-    player.pieceHealth = player.pieceHealth + food.areaHealth;
-}
-function cliff(){
-    // player's strength
-    let playerStrength = Math.ceil(player.pieceHealth / 2);
-    // cliff danger level
-    let cliffStrength = Math.ceil(Math.random()*playerStrength*2);
-    if (cliffStrength > playerStrength) {
-        player.pieceLives--;
+function endGame()
+{
+    if (boardOrginal[player.pieceLocationRow][player.pieceLocationColumn] == temple) {
+        //Display game message
+        gameMessage = "You've done it!  You've made it safely to the temple."
+    }
+    else if (player.pieceHealth<=0) {
+        gameMessage = "You've run out of health! GAME OVER";
     }
 
 }
+
 function render()
 {
     //Clear the game board of img tag cells from previous turn
@@ -283,7 +305,6 @@ function render()
                 gameBoard.removeChild(gameBoard.firstChild);
             }
         }
-
 
     //Render game by looping through the board arrays
     for (var row = 0; row < ROWS; row++) {
