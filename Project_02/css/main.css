@@ -1,0 +1,159 @@
+body {
+    font-family: kefa;
+    font-size: 24pt;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #D8FF75;
+}
+h1 {
+    font-family: kefa;
+    font-weight: bold;
+    font-size: 40pt;
+}
+h2 {
+    font-family: kefa;
+    font-weight: bold;
+    font-size: 30pt;
+}
+h3 {
+    font-family: kefa;
+    font-weight: bold;
+    font-size: 20pt;
+}
+h4 {
+    font-family: kefa;
+    font-weight: bold;
+    font-size: 12pt;
+}
+link {
+    font-family: noteworthy;
+    font-weight: lighter;
+    font-size: 24pt;
+    color: #333366;
+}
+#container {
+    position: relative;
+}
+header {
+    height: 200px;
+    margin-left: 140px;
+    margin-right: 140px;
+}
+.headerText {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.logo img {
+    position: absolute;
+    width: 196px;
+    height: 180px;
+}
+#menu {
+    position: absolute;
+    width: 100%;
+    height: 30px;
+    font-family: kefa;
+    font-weight: bold;
+    font-size: 18pt;
+    text-align: center;
+    color: black;
+    top: 150px;
+}
+#menu a {
+    color: black;
+}
+#menu a:hover {
+	color: rgba(40,188,210,1.00);
+}
+#menu ul {
+	padding-left: 4px;
+	padding-right: 4px;
+	width: 100%;
+}
+#menu li {
+	display: inline;
+	padding: 32px;
+}
+#topic {
+    position: absolute;
+    width: 100%;
+    height: 100px;
+    background-color: #401D14;
+}
+#topic h3 {
+    color: #ACC427;
+    text-align: center;
+    top: auto;
+    bottom: auto;
+}
+#stage {
+    position: relative;
+    display: block;
+    width: 50%;
+    height: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    top: 100px;
+    background-color: #D8FF75;
+}
+#introScreen {
+    position: absolute;
+    display: block;
+    width: auto;
+    height: auto;
+    margin-left: 0;
+    margin-right: 0;
+    align-self: center;
+}
+#introImage {
+    display: block;
+    width: 600px;
+    height: 600px;
+    position: relative;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url("../images/introImage.jpg");
+}
+#start {
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    right: 40%;
+    width: 20%;
+    margin: auto;
+}
+
+#gameScreen {
+    position: absolute;
+    display: none;
+    width: 512px;
+    height: 712px;
+    background-color: rgba(191, 127, 63, 0.3);
+}
+#gameInfo {
+    position: relative;
+}
+#gameBoard {
+    position: absolute;
+}
+
+.cell {
+    display: block;
+    position: absolute;
+    height: 64px;
+    width: 64px;
+}
+
+#output {
+    display: block;
+    position: relative;
+    top: 75%;
+    width: 512px;
+}
+footer {
+
+}
