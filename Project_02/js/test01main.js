@@ -5,19 +5,9 @@ var introWords2 = document.getElementById("introWords2");
 
 var introImage = document.getElementById('introImage');
 var tl = new TimelineLite();
-/*
-tl.add(TweenLite.from(introImage, 1.5, {y:-900}) )
-    .add(TweenLite.to(introWords1, 1, {x: -600, y: -600}))
-    .add(TweenLite.from(startBtn, 1, {y:-800}) );
-*/
-
 TweenMax.from(introImage, 1.5, {ease: Elastic.easeInOut.config(1, 0.3), y:-900});
 TweenMax.from(introWords1, 2, {x:-650, y:-650});
  TweenMax.from(startBtn, 3, {ease: Back.easeInOut.config(1), y: -500});
-
-//TweenMax.from(introWords1, 1.5, {x:-650, y: -650});
-//TweenMax.from(startBtn, 4.5, {ease: Back.easeInOut.config(1), y: -500});
-
 
 // Arrow key codes
 var UP = 38,
@@ -348,6 +338,9 @@ function render()
             //Find the correct image
             if (player.pieceLocationRow == row && player.pieceLocationColumn == column) {
                 cell.src = player.pieceImage;
+            }
+            else if (monster.pieceLocationRow == row && monster.pieceLocationColumn==column) {
+                cell.src = monster.pieceImage;
             }
                 else {
                     cell.src = boardOrginal[row][column].areaImage;
