@@ -131,15 +131,14 @@ header {
     position: absolute;
     display: none;
     width: 512px;
-    height: 512px;
-    background-color: white;
-    /*background-image: url(../images/trailBackground.jpg);*/
+    height: 712px;
+    background-color: rgba(191, 127, 63, 0.3);
 }
 #gameInfo {
     position: relative;
 }
 #gameBoard {
-    position: relative;
+    position: absolute;
 }
 
 .cell {
@@ -152,7 +151,7 @@ header {
 #output {
     display: block;
     position: relative;
-    top: 110%;
+    top: 75%;
     width: 512px;
 }
 footer {

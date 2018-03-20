@@ -87,6 +87,7 @@ var COLUMNS = board[0].length;
 
 //Initialize objects on the screen
 render();
+var gameDone = false;
 var gameMessage = 'Use the arrows to move around the board.';
 health.innerHTML = `HEALTH: ${player.pieceHealth}`;
 output.innerHTML = gameMessage;
@@ -97,6 +98,9 @@ window.addEventListener("keydown", keydownHandler, false);
 
 function keydownHandler(event)
 {
+    if (gameDone == true) {
+        return;
+    }
     switch (event.keyCode) {
         case UP:
         // checking if player's move is within board
@@ -173,11 +177,15 @@ function keydownHandler(event)
             player.pieceHealth = player.pieceHealth + mine.areaHealth;
             gameMessage = "You've stepped on a mine. Be careful.";
             console.log(`${player.pieceHealth}`);
+            let mineAudio = new Audio('audio/explosion.mp3');
+            mineAudio.play();
             break;
 
         case "food":
             console.log('food');
             player.pieceHealth = player.pieceHealth + food.areaHealth;
+            let foodAudio = new Audio('audio/food.mp3');
+            foodAudio.play();
             gameMessage = "Food to increase you health."
             console.log(`${player.pieceHealth}`);
             break;
@@ -290,9 +298,11 @@ function endGame()
         gameMessage = "You've done it!  You've made it safely to the temple."
     }
     else if (player.pieceHealth<=0) {
+        let audio = new Audio('audio/gameover.mp3');
+        audio.play();
         gameMessage = "You've run out of health! GAME OVER";
     }
-
+    gameDone = true;
 }
 
 function render()
